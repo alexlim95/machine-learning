@@ -6,6 +6,7 @@ to 0. The goal is to observe the converged values of the weights.
 Author: Alex Lim
 """
 
+# Import packages
 import numpy as np
 
 '''
@@ -35,7 +36,7 @@ w = np.zeros(3)
 '''
 Iterate through all data points.
 '''
-max_iterations = 10
+max_iterations = 16
 for t in range(max_iterations):
     for i in range(4):
         # check if misclassified or not --> update weights
@@ -49,7 +50,7 @@ for t in range(max_iterations):
             print('Data point correctly classified:', x[i])
 
 ''' Final weight vector '''
-print(w)
+print('Final weight vector:', w)
 
 
 
