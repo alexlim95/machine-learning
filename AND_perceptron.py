@@ -2,6 +2,8 @@
 This example shows the perceptron learning algorithm (update rule) applied to
 a logical AND. The desired output is already known. Weights are initialized
 to 0. The goal is to observe the converged values of the weights.
+
+Author: Alex Lim
 """
 
 import numpy as np
@@ -42,8 +44,9 @@ for t in range(max_iterations):
             w[0] = w[0] + x[i][0]*y[i]      # update w0
             w[1] = w[1] + x[i][1]*y[i]      # update w1
             w[2] = w[2] + x[i][2]*y[i]      # update w2
+            print('New value of weights after update:', w)
         else:
-            print("")
+            print('Data point correctly classified:', x[i])
 
 ''' Final weight vector '''
 print(w)
