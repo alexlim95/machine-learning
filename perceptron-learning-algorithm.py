@@ -61,18 +61,35 @@ print('Output results:\n', y_out)
 w = np.array([1., 1., 1.])
 
 # Continue to loop and update weights
-max_iterations = 200                                    # maximum iterations allowed (to prevent infinite loop)
-for t in range(max_iterations):                         # loop max_iterations times through the data points
-    for i, x in enumerate(D):                           # single loop through each input: j(index) x(input)
-        if (np.dot(x, w)*y_out[i]) <= 0:                # checks for misclassified input
+iter_count = 0                                              # counter to see how many iterations take place
+update_count = 0                                            # counter to see how many weight updates are done
+error_found = False                                         # boolean variable to check if misclassified input is found
+while True:
+    for i, x in enumerate(D):                               # single loop through each input: j(index) x(input)
+        if (np.dot(x, w)*y_out[i]) <= 0:                    # checks for misclassified input
+            error_found = True
             print('Found a misclassified input:', x)
             # Apply the update rule to the weights
             w[0] = w[0] + x[0]*y_out[i]
             w[1] = w[1] + x[1]*y_out[i]
             w[2] = w[2]  +x[2]*y_out[i]
+            update_count += 1                               # increment weight update counter
             print('New value of weights after update:', w)
         else:
             print('Input correctly classified:', x)
+    iter_count += 1  # increment iteration count
+    # Reset error_found boolean variable if misclassified input was found in iteration
+    if error_found is True:
+        error_found = False
+    # if went through whole data set without finding a misclassified input --> break loop --> DONE
+    elif error_found is False:
+        break
+
+# Number of iterations needed
+print('Number of iterations needed:', iter_count)
+
+# Number of weight updates needed
+print('Number of weight updates needed:', update_count)
 
 # Print the weights upon completion of iteration
 print('Weight values upon completion:', w)
