@@ -1,9 +1,9 @@
 """
-This code demonstrates the perceptron learning algorithm. A ideal target function
-f and data set D were created in order to see how the algorithm works. It takes
-d=2 (two-dimensional Eucliean space) in order to visualize the problem. The output
-y_out was found by evaluating the target function on each of the 20 randomly generated
-inputs. The perceptron learning algorithm was applied to the data set in order to converge
+This code demonstrates the perceptron learning algorithm. An ideal target function
+f and data set D were created in order to see how the algorithm works. This example
+shows the perceptron in a two-dimensional Euclidean space (d=2). The output y_out was
+found by evaluating the target function on each of the 20 randomly generated inputs.
+The perceptron learning algorithm was applied to the data set in order to converge
 to a final hypothesis g function and compared to the target function f.
 
 Author: Alex Lim
@@ -43,14 +43,16 @@ plt.plot(x_tar, f_tar, "--", figure=fig, color='c')     # plot target function l
 
 # Loop through each data input and evaluate output and plot
 for i, x in enumerate(D):
+    # Check if input is above the target function threshold (map to +1)
     if x[2] > m_tar*x[1]+b_tar:
         print(x, 'is above target function. Output is +1')
-        plt.scatter(x[1], x[2], c='red', marker='X', figure=fig)
-        y_out = np.append(y_out, 1)
+        plt.scatter(x[1], x[2], c='red', marker='X', figure=fig)    # plot point as a red X
+        y_out = np.append(y_out, 1)                                 # append output to array
+    # Input is below the target function threshold (map to -1)
     else:
         print(x, 'is below target function. Output is -1')
-        y_out = np.append(y_out, -1)
-        plt.scatter(x[1], x[2], c='black', marker='X', figure=fig)
+        y_out = np.append(y_out, -1)                                # append output to array
+        plt.scatter(x[1], x[2], c='black', marker='X', figure=fig)  # plot point as a black X
 
 # Print output results
 print('Output results:\n', y_out)
@@ -102,7 +104,7 @@ Result:
     d = y
     c = -d/x = -y/x
 '''
-b, w1, w2 = w                                              # extract weights for clarity
+b, w1, w2 = w                                            # extract weights for clarity
 x_line = -b/w1                                           # definition of x
 y_line = -b/w2                                           # definition of y
 d = y_line                                               # d
