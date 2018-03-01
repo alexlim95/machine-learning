@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 # Create own target function f
 m_tar = 0.5                                  # slope
 b_tar = 1                                    # y-intercept
-x_tar = np.linspace(-5, 5, 256)              # equally spaced values from -10 to 10
+x_tar = np.linspace(-5, 5, 12)                # equally spaced values from -10 to 10
 f_tar = m_tar*x_tar + b_tar                  # line equation (target function)
 
 '''
@@ -25,7 +25,7 @@ the points are mostly likely to be generated. The covariance is the
 level to which two variables vary together (higher covariance results
 in a more spread apart data points).
 '''
-D = np.random.multivariate_normal(mean=[1, 1], cov=np.diag([2, 2]), size=20)
+D = np.random.multivariate_normal(mean=[0, 1], cov=np.diag([2.5, 2.5]), size=20)
 
 # Include x0 input term
 x0 = 1                                       # x0 = 1
@@ -39,7 +39,7 @@ Modify the markers for each data point on the plot to be red for +1 and black fo
 '''
 y_out = np.array([])                                    # create an empty numpy array
 fig = plt.figure()                                      # create an empty figure object
-plt.plot(x_tar, f_tar, "--", figure=fig, color='c')     # plot target function line
+plt.plot(x_tar, f_tar, figure=fig, color='c')           # plot target function line
 
 # Loop through each data input and evaluate output and plot
 for i, x in enumerate(D):
@@ -61,7 +61,7 @@ print('Output results:\n', y_out)
 w = np.array([1., 1., 1.])
 
 # Continue to loop and update weights
-max_iterations = 100                                    # maximum iterations allowed (to prevent infinite loop)
+max_iterations = 200                                    # maximum iterations allowed (to prevent infinite loop)
 for t in range(max_iterations):                         # loop max_iterations times through the data points
     for i, x in enumerate(D):                           # single loop through each input: j(index) x(input)
         if (np.dot(x, w)*y_out[i]) <= 0:                # checks for misclassified input
@@ -109,8 +109,8 @@ x_line = -b/w1                                           # definition of x
 y_line = -b/w2                                           # definition of y
 d = y_line                                               # d
 c = -y_line/x_line                                       # c
-line_y_coords = c*x + d                                  # line equation
-plt.plot(x, line_y_coords, "--", figure=fig, color='g')  # plot decision boundary
+y_line = c*x + d                                         # line equation
+plt.plot(x, y_line, figure=fig, color='g')               # plot decision boundary
 
 # Plot characteristics
 plt.xlabel('x-axis')                             # x-axis label
