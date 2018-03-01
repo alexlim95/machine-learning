@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 # Create own target function f
 m_tar = 0.5                                  # slope
 b_tar = 1                                    # y-intercept
-x_tar = np.linspace(-5, 5, 12)                # equally spaced values from -10 to 10
+x_tar = np.linspace(-5, 5, 12)               # equally spaced values from -10 to 10
 f_tar = m_tar*x_tar + b_tar                  # line equation (target function)
 
 '''
