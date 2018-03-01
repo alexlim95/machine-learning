@@ -6,6 +6,9 @@ found by evaluating the target function on each of the 20 randomly generated inp
 The perceptron learning algorithm was applied to the data set in order to converge
 to a final hypothesis g function and compared to the target function f.
 
+The blue line is the target function f.
+The green line is the converged hypothesis g decision boundary line.
+
 Author: Alex Lim
 """
 
@@ -16,7 +19,7 @@ import matplotlib.pyplot as plt
 # Create own target function f
 m_tar = 0.5                                  # slope
 b_tar = 1                                    # y-intercept
-x_tar = np.linspace(-5, 5, 12)               # equally spaced values from -10 to 10
+x_tar = np.linspace(-5, 5, 22)               # equally spaced values from -10 to 10
 f_tar = m_tar*x_tar + b_tar                  # line equation (target function)
 
 '''
@@ -25,7 +28,7 @@ the points are mostly likely to be generated. The covariance is the
 level to which two variables vary together (higher covariance results
 in a more spread apart data points).
 '''
-D = np.random.multivariate_normal(mean=[0, 1], cov=np.diag([2.5, 2.5]), size=20)
+D = np.random.multivariate_normal(mean=[0, 1], cov=np.diag([3, 3]), size=20)
 
 # Include x0 input term
 x0 = 1                                       # x0 = 1
@@ -39,20 +42,20 @@ Modify the markers for each data point on the plot to be red for +1 and black fo
 '''
 y_out = np.array([])                                    # create an empty numpy array
 fig = plt.figure()                                      # create an empty figure object
-plt.plot(x_tar, f_tar, figure=fig, color='c')           # plot target function line
+plt.plot(x_tar, f_tar, "--", figure=fig, color='b')     # plot target function line
 
 # Loop through each data input and evaluate output and plot
 for i, x in enumerate(D):
     # Check if input is above the target function threshold (map to +1)
     if x[2] > m_tar*x[1]+b_tar:
         print(x, 'is above target function. Output is +1')
-        plt.scatter(x[1], x[2], c='red', marker='X', figure=fig)    # plot point as a red X
+        plt.scatter(x[1], x[2], c='red', marker='o', figure=fig)    # plot point as a red X
         y_out = np.append(y_out, 1)                                 # append output to array
     # Input is below the target function threshold (map to -1)
     else:
         print(x, 'is below target function. Output is -1')
         y_out = np.append(y_out, -1)                                # append output to array
-        plt.scatter(x[1], x[2], c='black', marker='X', figure=fig)  # plot point as a black X
+        plt.scatter(x[1], x[2], c='black', marker='o', figure=fig)  # plot point as a black X
 
 # Print output results
 print('Output results:\n', y_out)
@@ -127,7 +130,7 @@ y_line = -b/w2                                           # definition of y
 d = y_line                                               # d
 c = -y_line/x_line                                       # c
 y_line = c*x + d                                         # line equation
-plt.plot(x, y_line, figure=fig, color='g')               # plot decision boundary
+plt.plot(x, y_line, "--", figure=fig, color='g')         # plot decision boundary
 
 # Plot characteristics
 plt.xlabel('x-axis')                             # x-axis label
