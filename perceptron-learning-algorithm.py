@@ -9,6 +9,11 @@ to a final hypothesis g function and compared to the target function f.
 The blue line is the target function f.
 The green line is the converged hypothesis g decision boundary line.
 
+The way the perceptron learning algorithm works is by iterating through each input point
+and checking whether it is classified correctly. If a point is misclassified (i.e the sign
+of the dot product of the weights w and the input vector x is opposite the output y), then
+the algorithm updates each of the weights accordingly using the update rule w = w + y*x.
+
 Author: Alex Lim
 """
 
@@ -19,7 +24,7 @@ import matplotlib.pyplot as plt
 # Create own target function f
 m_tar = 0.5                                  # slope
 b_tar = 1                                    # y-intercept
-x_tar = np.linspace(-5, 5, 22)               # equally spaced values from -10 to 10
+x_tar = np.linspace(-3, 3)                   # equally spaced values from -3 to 3
 f_tar = m_tar*x_tar + b_tar                  # line equation (target function)
 
 '''
@@ -28,7 +33,7 @@ the points are mostly likely to be generated. The covariance is the
 level to which two variables vary together (higher covariance results
 in a more spread apart data points).
 '''
-D = np.random.multivariate_normal(mean=[0, 1], cov=np.diag([3, 3]), size=20)
+D = np.random.multivariate_normal(mean=[0, 1], cov=np.diag([1, 1]), size=20)
 
 # Include x0 input term
 x0 = 1                                       # x0 = 1
@@ -40,11 +45,11 @@ Get correct value of the output y_n by evaluating the target function on each x_
 Modify the markers for each data point on the plot to be red for +1 and black for
 -1 classification.
 '''
-y_out = np.array([])                                    # create an empty numpy array
-fig = plt.figure()                                      # create an empty figure object
-plt.plot(x_tar, f_tar, "--", figure=fig, color='b')     # plot target function line
+y_out = np.array([])                                                            # create an empty numpy array
+fig = plt.figure()                                                              # create an empty figure object
+plt.plot(x_tar, f_tar, "--", figure=fig, color='b', label="Target Function")    # plot target function line
 
-# Loop through each data input and evaluate output and plot
+# Loop through each data input and evaluate output and plot appropriate color (+1=red -1=black)
 for i, x in enumerate(D):
     # Check if input is above the target function threshold (map to +1)
     if x[2] > m_tar*x[1]+b_tar:
@@ -123,19 +128,22 @@ Two more unknowns:
 Result:
     d = y
     c = -d/x = -y/x
+    
+In terms of weights:
+    slope = -(w[0]/w[2])/(w[0]/w[1])
+    intercept = -w[0]/w[2]
+    y_line = slope*x + intercept
 '''
-b, w1, w2 = w                                            # extract weights for clarity
-x_line = -b/w1                                           # definition of x
-y_line = -b/w2                                           # definition of y
-d = y_line                                               # d
-c = -y_line/x_line                                       # c
-y_line = c*x + d                                         # line equation
-plt.plot(x, y_line, "--", figure=fig, color='g')         # plot decision boundary
+slope = -(w[0]/w[2])/(w[0]/w[1])                                             # slope of line
+intercept = -w[0]/w[2]                                                       # y-intercept
+y_line = slope*x_tar + intercept                                             # line equation
+plt.plot(x_tar, y_line, "--", figure=fig, color='g', label="Hypothesis")     # plot decision boundary
 
 # Plot characteristics
-plt.xlabel('x-axis')                             # x-axis label
-plt.ylabel('y-axis')                             # y-axis label
+plt.xlabel('X1 Axis')                            # x-axis label
+plt.ylabel('X2 Axis')                            # y-axis label
 plt.grid(True)                                   # turn on grid
 plt.title('Perceptron Learning Algorithm')       # title
+plt.legend()                                     # show legend
 plt.show()                                       # show plot
 
