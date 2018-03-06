@@ -24,16 +24,16 @@ import matplotlib.pyplot as plt
 # Create own target function f
 m_tar = 0.5                                  # slope
 b_tar = 1                                    # y-intercept
-x_tar = np.linspace(-3, 3)                   # equally spaced values from -3 to 3
+x_tar = np.linspace(-5, 5)                   # equally spaced values from -5 to 5
 f_tar = m_tar*x_tar + b_tar                  # line equation (target function)
 
 '''
 Create own data set D of 20 random points. The mean determines where
 the points are mostly likely to be generated. The covariance is the 
 level to which two variables vary together (higher covariance results
-in a more spread apart data points).
+in more spread apart data points).
 '''
-D = np.random.multivariate_normal(mean=[0, 1], cov=np.diag([1, 1]), size=20)
+D = np.random.multivariate_normal(mean=[0, 1], cov=np.diag([1, 1]), size=100)
 
 # Include x0 input term
 x0 = 1                                       # x0 = 1
