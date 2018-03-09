@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 # Obtain a initial line equation
 m = 2
 b = 1
-x_line = np.linspace(-10, 10, 256)   # x-axis points - equally spaces from -10 to 10 (256 points
-y = m*x_line + b                     # line equation
+x_line = np.linspace(-3, 3)     # x-axis points from -3 to 3
+y = m*x_line + b                # line equation
 
 fig = plt.figure()              # create a figure object
 
@@ -22,10 +22,10 @@ x_data = np.random.multivariate_normal([1, 1], np.diag([1, 1]), size=20)
 for i in range(x_data.shape[0]):
     plt.scatter(x_data[i, 0], x_data[i, 1], figure=fig, c='black', marker='X')
 
-plt.plot(x_line, y, "--", figure=fig)      # creates a line plot
-plt.xlabel('x-axis')            # x-axis label
-plt.ylabel('y-axis')            # y-axis label
-plt.title('Line Plot Example')  # plot label
-plt.show()                      # show plot
+plt.plot(x_line, y, "--", figure=fig)   # creates a line plot
+plt.xlabel('x-axis')                    # x-axis label
+plt.ylabel('y-axis')                    # y-axis label
+plt.title('Line Plot Example')          # plot label
+plt.show()                              # show plot
 
 
